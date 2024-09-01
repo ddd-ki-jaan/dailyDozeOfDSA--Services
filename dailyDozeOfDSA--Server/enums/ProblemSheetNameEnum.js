@@ -1,0 +1,12 @@
+const ProblemSheetNameEnum = [
+  "STRIVER_SDE_SHEET",
+  "STRIVER_A2Z_DSA_SHEET",
+  "STRIVER_79_DSA_SHEET",
+  "LOVE_BABBAR_450_DSA_SHEET",
+  "APNA_COLLEGE_DSA_SHEET",
+  "BLIND_75_DSA_SHEET",
+  "NEET_CODE_150_DSA_SHEET",
+  "NISHANT_CHAHAR_151_DSA_SHEET",
+];
+
+export default ProblemSheetNameEnum;

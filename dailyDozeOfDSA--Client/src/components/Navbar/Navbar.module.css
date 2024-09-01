@@ -1,0 +1,48 @@
+.navbar-container {
+  /* background: yellow; */
+  border-bottom: 2px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 8px;
+}
+
+.navbar-logo {
+  cursor: pointer;
+}
+
+.logo-img {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.nav-links-container {
+  display: flex;
+  column-gap: 24px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #000;
+  padding: 4px 2px;
+}
+
+.nav-link:hover {
+  color: inherit;
+}
+
+.active-link {
+  border-bottom: 2px solid #000;
+}
+
+.navigate-icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 24px;
+  font-size: 2rem;
+}
+
+.prev-icon,
+.next-icon {
+  cursor: pointer;
+}

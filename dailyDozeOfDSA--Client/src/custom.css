@@ -1,0 +1,43 @@
+.flowbite-select div select {
+  font-size: 1rem;
+  box-shadow: none;
+  border: 2px solid #000;
+}
+
+/* styling for pagination container */
+.paginate-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 12px;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.paginate-container .container-li {
+  width: 52px;
+  height: 52px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.paginate-container .container-li .container-li-a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginate-container .active-li {
+  border: 2px solid blue;
+  color: blue;
+}
+
+.paginate-container .disabled-li {
+  border-color: #bbb;
+  color: #bbb;
+}
+
+/* styling for toggle button */
