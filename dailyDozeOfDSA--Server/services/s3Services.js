@@ -27,7 +27,7 @@ export async function uploadFile(file, userId) {
     const fileStream = fs.createReadStream(file.path);
 
     const uniqueId = uuidv4();
-    const key = `${userId}/${uniqueId}-${file.filename}`;
+    const key = `Users/${userId}/${uniqueId}-${file.filename}`;
 
     const uploadParams = {
         Bucket: bucketName,

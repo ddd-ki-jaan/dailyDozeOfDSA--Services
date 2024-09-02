@@ -19,11 +19,11 @@ function SignIn() {
   const { userLoggedInStatus } = useContext(UserContext);
 
   async function clickedGoogleAuthBtn() {
-    window.open(backendBaseUrl + "/api/v1/auth/google", "_self");
+    window.open("/api/v1/auth/google", "_self");
   }
 
   async function clickedGitHubAuthBtn() {
-    window.open(backendBaseUrl + "/api/v1/auth/github", "_self");
+    window.open("/api/v1/auth/github", "_self");
   }
 
   useEffect(() => {
