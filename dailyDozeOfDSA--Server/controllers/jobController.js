@@ -48,6 +48,14 @@ export async function getJobs(request, response) {
         },
       },
       {
+        $lookup: {
+          from: "media",
+          localField: "companyArr.companyLogo",
+          foreignField: "_id",
+          as: "companyLogoArr",
+        },
+      },
+      {
         $match: {
           $or: [
             { jobTitle: searchRegex },
@@ -68,7 +76,11 @@ export async function getJobs(request, response) {
                 jobTitle: 1,
                 applyLink: 1,
                 tags: "$tagsArr",
-                company: { $arrayElemAt: ["$companyArr", 0] },
+                // company: { $arrayElemAt: ["$companyArr", 0] },
+                company: {
+                  companyName: { $arrayElemAt: ["$companyArr.companyName", 0] },
+                  companyLogo: { $arrayElemAt: ["$companyLogoArr.url", 0] },
+                },
               },
             },
           ],
