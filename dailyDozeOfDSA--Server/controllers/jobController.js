@@ -34,16 +34,36 @@ export async function getJobs(request, response) {
       {
         $lookup: {
           from: "tags",
-          localField: "tags",
-          foreignField: "_id",
+          let: {
+            tagIds: {
+              $map: {
+                input: "$tags",
+                as: "tagId",
+                in: { $toObjectId: "$$tagId" }
+              }
+            }
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $in: ["$_id", "$$tagIds"] },
+              },
+            },
+          ],
           as: "tagsArr",
         },
       },
       {
         $lookup: {
           from: "companies",
-          localField: "company",
-          foreignField: "_id",
+          let: { companyId: { $toObjectId: "$company" } },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ["$_id", "$$companyId"] },
+              },
+            },
+          ],
           as: "companyArr",
         },
       },
