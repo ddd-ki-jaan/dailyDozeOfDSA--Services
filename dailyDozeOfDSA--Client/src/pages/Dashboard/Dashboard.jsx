@@ -185,13 +185,15 @@ function Dashboard() {
           </div>
           <div className="mt-6 w-full grid grid-cols-3 gap-x-16 gap-y-12">
             {savedEngineeringNotes?.length > 0 ? (
-              savedEngineeringNotes.slice(0, 3).map((savedNote, index) => (
-                <PDFCard
-                  key={index}
-                  note={savedNote.note}
-                  isSaved={!!savedNote.isSaved}
-                />
-              ))
+              savedEngineeringNotes
+                .slice(0, 3)
+                .map((savedNote, index) => (
+                  <PDFCard
+                    key={index}
+                    note={savedNote}
+                    isSaved={!!savedNote.isSaved}
+                  />
+                ))
             ) : (
               <div>No Saved Notes found</div>
             )}
