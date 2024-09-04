@@ -2,13 +2,13 @@ import React from "react";
 import styles from "./JobCard.module.css";
 // import googleLogo from "../../assets/googleLogo.jpeg";
 
-function JobCard({ companyName, jobTitle, applyLink, tags, companyLogo }) {
+function JobCard({ companyName, jobTitle, tags, applyLink, company }) {
   return (
     <div className={styles.jobCard}>
       <div className={styles.companyLogo}>
-        <img
-          src="/googleLogo.jpeg"
-          alt="Company Logo"
+      <img
+          src={company?.companyLogo || "/googleLogo.jpeg"} 
+          alt={`${companyName} Logo`} 
           className={styles.logoImg}
         />
       </div>

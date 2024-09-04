@@ -126,6 +126,8 @@ function JobOpenings() {
                 companyName={jobData.company.companyName}
                 jobTitle={jobData.jobTitle}
                 tags={jobData.tags}
+                applyLink={jobData.applyLink}
+                company={jobData.company}
               />
             ))}
           </div>
