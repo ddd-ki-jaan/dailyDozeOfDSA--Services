@@ -51,7 +51,7 @@ function App() {
         {
           element: <ProtectedRoutes />,
           children: [
-            { path: "Dashboard", element: <Dashboard /> },
+            { path: "dashboard", element: <Dashboard /> },
             { path: "mySavedNotes", element: <MySavedNotest /> },
           ],
         },
