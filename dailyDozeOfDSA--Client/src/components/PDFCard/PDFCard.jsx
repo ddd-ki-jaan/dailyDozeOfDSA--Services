@@ -18,8 +18,9 @@ function PDFCard({ note, isSaved = false }) {
 
   const navigate = useNavigate();
 
-  async function saveNoteHandler() {
+  async function saveNoteHandler(event) {
     if (isANoteGettingSaved) return;
+    event.stopPropagation();
     toggleIsANoteGettingSaved(note._id);
     try {
       const response = await updateUserEngNotesSavedStatus(note._id);
@@ -51,7 +52,7 @@ function PDFCard({ note, isSaved = false }) {
           <div
             onClick={
               isSaved
-                ? () => toggleConfirmationPopup(note._id)
+                ? (event) => toggleConfirmationPopup(event, note._id)
                 : saveNoteHandler
             }
             className="absolute top-2 right-2 text-xl"
