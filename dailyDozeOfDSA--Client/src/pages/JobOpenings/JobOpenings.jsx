@@ -79,7 +79,7 @@ function JobOpenings() {
             <Label
               className="text-md font-normal"
               htmlFor="pageLimitOptions"
-              value="select page limit: "
+              value="Select Page limit: "
             />
             <Select
               value={selectedPageLimit}
