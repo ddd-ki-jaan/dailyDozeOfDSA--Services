@@ -42,8 +42,10 @@ function EngineeringNotesProvider({ children }) {
 
   async function getUserSavedEngineeringNotesHandler() {
     try {
-      const response = await getUserSavedEngineeringNotes();
-      setSavedEngineeringNotes(response.data.data);
+      const response = await getEngineeringNotes("ALL", 0, true);
+      if (response?.data?.success) {
+        setSavedEngineeringNotes(response.data.data || []);
+      }
     } catch (error) {
       console.error("*** fetchUserSavedEngineeringNotes error: ", error);
       throw error;

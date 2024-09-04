@@ -184,23 +184,29 @@ function YoDashboard() {
           <div className="border-b border-dashed border-black">
             <span className="text-2xl font-light">Your Saved Notes...</span>
           </div>
-          <div className="mt-6 w-full grid grid-cols-3 gap-x-16 gap-y-12">
-            {console.log("savedEngineeringNotes", savedEngineeringNotes)}
+          <div className="mt-6 w-full grid grid-cols-3 gap-x-16 gap-y-8">
             {savedEngineeringNotes?.length > 0 ? (
-              savedEngineeringNotes.map((savedNote, index) => (
-                <PDFCard
-                  key={index}
-                  note={savedNote.note}
-                  isSaved={!!savedNote.isSaved}
-                />
-              ))
+              savedEngineeringNotes
+                .slice(0, 3)
+                .map((savedNote, index) => (
+                  <PDFCard
+                    key={index}
+                    note={savedNote}
+                    isSaved={!!savedNote.isSaved}
+                  />
+                ))
             ) : (
-              <div>No Saved Notes found</div>
+              <div>No Saved Notes found...</div>
             )}
           </div>
           <div
-            className="mt-2 border-b border-blue-600 inline-block cursor-pointer"
-            onClick={() => navigate("/mySavedNotes")}
+            className="-mt-2 border-b border-blue-600 inline-block cursor-pointer"
+            onClick={() =>
+              navigate({
+                pathname: "/engineeringNotes",
+                search: "?category=ALL&pageNum=1&showSavedNotes=true",
+              })
+            }
           >
             <span className="text-blue-600 text-base font-light ">
               See More...
