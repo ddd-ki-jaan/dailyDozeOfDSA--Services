@@ -196,7 +196,7 @@ function Dashboard() {
               <div>No Saved Notes found</div>
             )}
           </div>
-          {savedEngineeringNotes.length > 3 && !showAll && (
+          {savedEngineeringNotes.length > 3 && (
             <div
               className="mt-2 border-b border-blue-600 inline-block cursor-pointer"
               onClick={() => navigate("/mySavedNotes")}
