@@ -1,0 +1,66 @@
+.jobCard {
+  display: flex;
+  align-items: center;
+  border: 1px solid #000;
+  border-top-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+
+.companyLogo {
+  margin-right: 40px;
+}
+
+.logoImg {
+  width: 45px;
+  height: 45px;
+}
+
+.jobDetails {
+  flex: 1;
+}
+
+.jobDetails p {
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+}
+
+.jobDesc {
+  font-size: 1.3rem;
+  font-weight: 300;
+  letter-spacing: 0.05rem;
+}
+
+.tagContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #000;
+  color: #fff;
+  margin-right: 7px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 2px 12px;
+}
+
+.applyLink {
+  flex: 0 0 auto;
+}
+
+.applyButton {
+  background-color: black;
+  border: none;
+  outline: none;
+  padding: 7px 14px;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  color: #fff;
+}
+
+.applyButton:hover {
+  cursor: pointer;
+}

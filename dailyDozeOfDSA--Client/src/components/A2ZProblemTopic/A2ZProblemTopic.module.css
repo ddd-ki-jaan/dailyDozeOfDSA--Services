@@ -1,0 +1,52 @@
+.topic-header-container {
+  margin-bottom: 14px;
+  margin-top: 28px;
+  padding: 12px;
+  border: 1px solid #000;
+  border-top-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  display: flex;
+  align-items: center;
+}
+
+.topic-header-container:first-child {
+  margin-top: 0;
+}
+
+.header-topic-no {
+  white-space: nowrap;
+}
+
+/* .header-inner-container {
+  display: flex;
+  align-items: center;
+} */
+
+.header-topic-name {
+  width: 100%;
+  margin-left: 24px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+}
+
+.progress-bar {
+  width: 250px;
+  height: 7px;
+  border: 1px solid #000;
+  position: relative;
+  margin-left: auto;
+}
+
+.filled-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: inherit;
+  width: 150px;
+  background: #000;
+}
+
+.sub-topic-container {
+  margin-left: 48px;
+}

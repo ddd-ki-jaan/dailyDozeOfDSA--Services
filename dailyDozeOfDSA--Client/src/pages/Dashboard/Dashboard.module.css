@@ -1,0 +1,141 @@
+.container {
+    padding: 5px;
+    /* background-color: #e0d5d576; */
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+  
+  .profileSection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    background-color: #333;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+  }
+  
+  .avatar {
+    background-color: grey;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+  }
+  
+  .cardBody h2 {
+    margin: 10px 0;
+  }
+  
+  .cardBody p {
+    margin: 5px 0;
+  }
+  
+  .cardTitle {
+    color: #ffffff;
+  }
+  
+  .socialIcons {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  
+  .iconButton {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .addButton {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .codingIcons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+  }
+  
+  .codingIcon {
+    background-color: grey;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+  }
+  
+  .statsSection {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .statCard {
+    text-align: center;
+  }
+  
+  .statCircle {
+    background-color: grey;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+  
+  .flexSection {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .jobButton,
+  .noteButton {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .feedbackSection {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .feedbackButton {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
