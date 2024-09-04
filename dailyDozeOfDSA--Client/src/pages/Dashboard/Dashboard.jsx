@@ -179,15 +179,13 @@ function Dashboard() {
             ))}
           </div>
         </div>
-
         <div className="mt-8">
           <div className="border-b border-dashed border-black">
             <span className="text-2xl font-light">Your Saved Notes...</span>
           </div>
           <div className="mt-6 w-full grid grid-cols-3 gap-x-16 gap-y-12">
-            {console.log("savedEngineeringNotes", savedEngineeringNotes)}
             {savedEngineeringNotes?.length > 0 ? (
-              savedEngineeringNotes.map((savedNote, index) => (
+              savedEngineeringNotes.slice(0, 3).map((savedNote, index) => (
                 <PDFCard
                   key={index}
                   note={savedNote.note}
@@ -198,16 +196,17 @@ function Dashboard() {
               <div>No Saved Notes found</div>
             )}
           </div>
-          <div
-            className="mt-2 border-b border-blue-600 inline-block cursor-pointer"
-            onClick={() => navigate("/mySavedNotes")}
-          >
-            <span className="text-blue-600 text-base font-light ">
-              See More...
-            </span>
-          </div>
+          {savedEngineeringNotes.length > 3 && !showAll && (
+            <div
+              className="mt-2 border-b border-blue-600 inline-block cursor-pointer"
+              onClick={() => navigate("/mySavedNotes")}
+            >
+              <span className="text-blue-600 text-base font-light ">
+                See More...
+              </span>
+            </div>
+          )}
         </div>
-
         <ConfirmationPopup />
       </div>
     </>
