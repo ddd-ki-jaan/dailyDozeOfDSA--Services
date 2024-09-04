@@ -64,14 +64,14 @@ function ProblemsTable({ sheetEnum, problemsArr }) {
                       </div>
                     </div>
                   </td> */}
-                  <td>
-                    <div className="flex gap-x-2">
+                  <td className="min-w-max">
+                    <div className="grid grid-flow-col gap-x-2">
                       {curr_problem.practice_solution_links.length > 0 ? (
                         curr_problem.practice_solution_links.map(
                           (link, index) => (
                             <div
                               key={link._id}
-                              className="px-2 py-1 text-sm bg-[#dcf8c6] w-fit rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600"
+                              className="whitespace-nowrap w-fit px-2 py-1 text-sm bg-[#dcf8c6] rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600"
                               onClick={() =>
                                 window.open(link.platform_link, "_blank")
                               }
