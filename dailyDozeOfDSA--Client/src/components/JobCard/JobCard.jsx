@@ -7,7 +7,7 @@ function JobCard({ companyName, jobTitle, tags, applyLink, company }) {
     <div className={styles.jobCard}>
       <div className={styles.companyLogo}>
       <img
-          src={company?.companyLogo || "/googleLogo.jpeg"} 
+          src={company?.companyLogo || "/dummyLogo.png"} 
           alt={`${companyName} Logo`} 
           className={styles.logoImg}
         />
