@@ -80,7 +80,8 @@ function EngineeringNotesProvider({ children }) {
     setIsANoteGettingSaved(noteId);
   }
 
-  function toggleConfirmationPopup(cardId) {
+  function toggleConfirmationPopup(event, cardId) {
+    event?.stopPropagation();
     setShowConfirmationPopup(cardId);
   }
 

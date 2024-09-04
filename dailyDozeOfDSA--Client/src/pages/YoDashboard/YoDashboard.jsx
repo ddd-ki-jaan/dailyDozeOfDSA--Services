@@ -199,19 +199,21 @@ function YoDashboard() {
               <div>No Saved Notes found...</div>
             )}
           </div>
-          <div
-            className="-mt-2 border-b border-blue-600 inline-block cursor-pointer"
-            onClick={() =>
-              navigate({
-                pathname: "/engineeringNotes",
-                search: "?category=ALL&pageNum=1&showSavedNotes=true",
-              })
-            }
-          >
-            <span className="text-blue-600 text-base font-light ">
-              See More...
-            </span>
-          </div>
+          {savedEngineeringNotes?.length > 3 && (
+            <div
+              className="-mt-2 border-b border-blue-600 inline-block cursor-pointer"
+              onClick={() =>
+                navigate({
+                  pathname: "/engineeringNotes",
+                  search: "?category=ALL&pageNum=1&showSavedNotes=true",
+                })
+              }
+            >
+              <span className="text-blue-600 text-base font-light ">
+                See More...
+              </span>
+            </div>
+          )}
         </div>
 
         <ConfirmationPopup />

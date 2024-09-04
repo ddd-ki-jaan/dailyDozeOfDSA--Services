@@ -14,6 +14,7 @@ function ConfirmationPopup() {
     showConfirmationPopup,
     toggleConfirmationPopup,
     fetchEngineeringNotes,
+    getUserSavedEngineeringNotesHandler,
   } = useContext(EngineeringNotesContext);
 
   const { setUserLoggedInStatusToFalse } = useContext(UserContext);
@@ -30,6 +31,7 @@ function ConfirmationPopup() {
       );
       if (response && response.data && response.data.success) {
         await fetchEngineeringNotes();
+        await getUserSavedEngineeringNotesHandler();
         toast.success(response.data.message, {
           position: "top-right",
           duration: 2000,
