@@ -2,8 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import ProblemSet from "./pages/ProblemSet/ProblemSet";
+// import Dashboard from "./pages/Dashboard/Dashboard";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import YoDashboard from "./pages/YoDashboard/YoDashboard";
 import ProblemSetProvider from "./contexts/problemSetContext";
 import UserProvider from "./contexts/userContext";
 import SignIn from "./pages/SignIn/SignIn";
@@ -50,7 +50,7 @@ function App() {
         {
           element: <ProtectedRoutes />,
           children: [
-            { path: "yoDashboard", element: <YoDashboard /> },
+            { path: "Dashboard", element: <Dashboard /> },
             { path: "mySavedNotes", element: <MySavedNotest /> },
           ],
         },
