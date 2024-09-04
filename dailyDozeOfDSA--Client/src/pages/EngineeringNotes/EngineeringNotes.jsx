@@ -123,7 +123,7 @@ function EngineeringNotes() {
               <Label
                 className="text-md font-normal"
                 htmlFor="notesCategoryOptions"
-                value="select notes category: "
+                value="Select Notes Category: "
               />
               <Select
                 value={selectedCategory}

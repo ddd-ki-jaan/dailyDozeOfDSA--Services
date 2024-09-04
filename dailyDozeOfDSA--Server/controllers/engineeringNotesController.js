@@ -44,7 +44,7 @@ export async function yelloGetEngineeringNotes(request, response) {
       });
     }
 
-    const pageLimit = 3;
+    const pageLimit = 9;
 
     let pipeline = [];
     if (notesCategoryExists.optionValue !== "ALL") {
@@ -286,6 +286,43 @@ export async function getEngineeringNoteById(req, res) {
     res.status(500).json({
       success: false,
       message: error.message || "Something went wrong",
+    });
+  }
+}
+
+export async function getNotesUrlFromSlug(request, response) {
+  try {
+    const slug = request.query.slug;
+
+    if (!slug) {
+      return response.status(400).json({
+        success: false,
+        message: "notes slug must be provided",
+      });
+    }
+
+    const result = await Note.findOne({ slug }).populate({
+      path: "noteContent",
+      model: "Media",
+    });
+
+    const notesUrl = result?.noteContent?.url ?? "";
+
+    if (!notesUrl) {
+      return response.status(404).json({
+        success: false,
+        message: "notes corresponding to the slug couldn't be found",
+      });
+    }
+
+    return response.status(200).json({
+      success: true,
+      data: notesUrl,
+    });
+  } catch (error) {
+    return response.status(500).json({
+      success: false,
+      message: "something went wrong",
     });
   }
 }

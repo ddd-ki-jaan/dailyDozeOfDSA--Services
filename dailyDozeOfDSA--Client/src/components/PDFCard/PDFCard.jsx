@@ -18,8 +18,9 @@ function PDFCard({ note, isSaved = false }) {
 
   const navigate = useNavigate();
 
-  async function saveNoteHandler() {
+  async function saveNoteHandler(event) {
     if (isANoteGettingSaved) return;
+    event.stopPropagation();
     toggleIsANoteGettingSaved(note._id);
     try {
       const response = await updateUserEngNotesSavedStatus(note._id);
@@ -41,17 +42,17 @@ function PDFCard({ note, isSaved = false }) {
   return (
     <>
       <div className="min-w-[220px] h-[250px]">
-        <div className="cursor-pointer relative w-full h-[200px] flex items-center border border-black rounded-tr-[7px] rounded-bl-[7px]">
-          <div
-            className="w-full bg-[#ff0000] text-white text-8xl font-light flex justify-center"
-            onClick={() => navigate(`/pdfViewer/${note.slug}`)}
-          >
+        <div
+          className="cursor-pointer relative w-full h-[200px] flex items-center border border-black rounded-tr-[7px] rounded-bl-[7px]"
+          onClick={() => navigate(`/pdfViewer/${note.slug}`)}
+        >
+          <div className="w-full bg-[#ff0000] text-white text-8xl font-light flex justify-center">
             PDF
           </div>
           <div
             onClick={
               isSaved
-                ? () => toggleConfirmationPopup(note._id)
+                ? (event) => toggleConfirmationPopup(event, note._id)
                 : saveNoteHandler
             }
             className="absolute top-2 right-2 text-xl"

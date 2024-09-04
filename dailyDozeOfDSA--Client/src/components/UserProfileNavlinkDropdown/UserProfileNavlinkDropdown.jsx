@@ -28,14 +28,14 @@ function UserProfileNavlinkDropdown() {
       <div className="flex items-center gap-x-1 cursor-pointer">
         <div>
           <NavLink
-            to="yoDashboard"
+            to="dashboard"
             className={({ isActive }) =>
               isActive
                 ? "border-b-2 border-black px-[2px] py-[4px]"
                 : "px-[2px] py-[4px]"
             }
           >
-            YoDashboard
+            Dashboard
           </NavLink>
         </div>
         <div className="transition group-hover:rotate-180 ease-in">
@@ -46,9 +46,9 @@ function UserProfileNavlinkDropdown() {
         <ul className="flex flex-col text-sm">
           <NavLink
             className="px-2 py-1 hover:bg-white rounded-[7px]"
-            to="yoDashboard"
+            to="dashboard"
           >
-            YoDashboard
+            Dashboard
           </NavLink>
           <button
             onClick={logUserOut}

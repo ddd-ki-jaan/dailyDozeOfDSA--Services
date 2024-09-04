@@ -22,6 +22,7 @@ import { Toaster } from "react-hot-toast";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./custom.css";
+import PDFViewerContextProvider from "./contexts/pdfViewerContext.jsx";
 
 function App() {
   const browserRouter = createBrowserRouter([
@@ -50,32 +51,34 @@ function App() {
         {
           element: <ProtectedRoutes />,
           children: [
-            { path: "Dashboard", element: <Dashboard /> },
+            { path: "dashboard", element: <Dashboard /> },
             { path: "mySavedNotes", element: <MySavedNotest /> },
           ],
         },
         { path: "signIn", element: <SignIn /> },
       ],
     },
-    { path: "pdfViewer/:id", element: <PDFViewer /> },
+    { path: "pdfViewer/:slug", element: <PDFViewer /> },
   ]);
 
   return (
     <>
       <UserProvider>
-        <EngineeringNotesProvider>
-          <ProblemSetProvider>
-            <JobOpeningsProvider>
-              <DashboardProvider>
-                <HomeProvider>
-                  <SkeletonTheme baseColor="#e0e0e0" highlightColor="#f5f5f5">
-                    <RouterProvider router={browserRouter} />
-                  </SkeletonTheme>
-                </HomeProvider>
-              </DashboardProvider>
-            </JobOpeningsProvider>
-          </ProblemSetProvider>
-        </EngineeringNotesProvider>
+        <PDFViewerContextProvider>
+          <EngineeringNotesProvider>
+            <ProblemSetProvider>
+              <JobOpeningsProvider>
+                <DashboardProvider>
+                  <HomeProvider>
+                    <SkeletonTheme baseColor="#e0e0e0" highlightColor="#f5f5f5">
+                      <RouterProvider router={browserRouter} />
+                    </SkeletonTheme>
+                  </HomeProvider>
+                </DashboardProvider>
+              </JobOpeningsProvider>
+            </ProblemSetProvider>
+          </EngineeringNotesProvider>
+        </PDFViewerContextProvider>
       </UserProvider>
       <Toaster />
     </>

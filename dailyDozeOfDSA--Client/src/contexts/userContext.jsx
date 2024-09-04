@@ -32,7 +32,6 @@ function UserProvider({ children }) {
   useEffect(() => {
     (async function () {
       const checkLoggedInStatus = await axios.get("/api/v1/auth/check-session");
-      console.log("*** checkLoggedInStatus: ", checkLoggedInStatus);
       if (checkLoggedInStatus.data) {
         setUserLoggedInStatus(checkLoggedInStatus.data);
       }

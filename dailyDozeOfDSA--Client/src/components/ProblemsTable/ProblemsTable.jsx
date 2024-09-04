@@ -54,7 +54,7 @@ function ProblemsTable({ sheetEnum, problemsArr }) {
                     {/* <span className="absolute top-0 left-0 w-6 h-1/2 bg-blue-500"></span> */}
                   </td>
                   <td className="text-base">{curr_problem.problem_name}</td>
-                  <td>
+                  {/* <td>
                     <div className="flex gap-x-2">
                       <div className="px-2 py-1 text-sm bg-[#dcf8c6] w-fit rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600">
                         link-1
@@ -62,6 +62,27 @@ function ProblemsTable({ sheetEnum, problemsArr }) {
                       <div className="px-2 py-1 text-sm bg-[#dcf8c6] w-fit rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600">
                         link-2
                       </div>
+                    </div>
+                  </td> */}
+                  <td>
+                    <div className="flex gap-x-2">
+                      {curr_problem.practice_solution_links.length > 0 ? (
+                        curr_problem.practice_solution_links.map(
+                          (link, index) => (
+                            <div
+                              key={link._id}
+                              className="px-2 py-1 text-sm bg-[#dcf8c6] w-fit rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600"
+                              onClick={() =>
+                                window.open(link.platform_link, "_blank")
+                              }
+                            >
+                              link-{index + 1}
+                            </div>
+                          )
+                        )
+                      ) : (
+                        <span className="text-sm text-gray-500">NA</span>
+                      )}
                     </div>
                   </td>
                   <td>

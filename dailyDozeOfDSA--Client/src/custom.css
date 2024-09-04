@@ -40,4 +40,24 @@
   color: #bbb;
 }
 
-/* styling for toggle button */
+/* styling for pdf viewer container */
+
+.react-pdf__Page {
+  margin-bottom: 8px;
+}
+
+.react-pdf__Page__canvas {
+  /* width: 100% !important; */
+  border: 1px dashed #000;
+}
+
+.react-pdf__Thumbnail__page {
+  margin-bottom: 8px;
+}
+
+.react-pdf__Thumbnail__page__canvas {
+  /* display: none !important; */
+  border: 1px dashed #000;
+  padding: 8px !important;
+  background-color: lightgray;
+}

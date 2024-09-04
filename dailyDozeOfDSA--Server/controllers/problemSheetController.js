@@ -26,6 +26,9 @@ async function getStriverSDESheet(request, response) {
           {
             path: "solution_article_links",
           },
+          {
+            path: "practice_solution_links",
+          }
         ],
       })
       .sort({ day_no: 1 })
@@ -88,6 +91,9 @@ async function getStriverA2ZSheet(request, response) {
             {
               path: "solution_article_links",
             },
+            {
+              path: "practice_solution_links",
+            }
           ],
         },
       })
@@ -157,6 +163,9 @@ async function getStriver79Sheet(request, response) {
           {
             path: "solution_article_links",
           },
+          {
+            path: "practice_solution_links",
+          }
         ],
       })
       .sort({ day_no: 1 })
@@ -217,6 +226,9 @@ async function getLoveBabbar450DSASheet(request, response) {
           {
             path: "solution_article_links",
           },
+          {
+            path: "practice_solution_links",
+          }
         ],
       })
       .sort({ topic_no: 1 })
@@ -277,6 +289,9 @@ async function getApnaCollegeDSASheet(request, response) {
           {
             path: "solution_article_links",
           },
+          {
+            path: "practice_solution_links",
+          }
         ],
       })
       .sort({ day_no: 1 })
@@ -337,6 +352,9 @@ async function getBlind75Sheet(request, response) {
           {
             path: "solution_article_links",
           },
+          {
+            path: "practice_solution_links",
+          }
         ],
       })
       .sort({ topic_no: 1 })
@@ -397,6 +415,9 @@ async function getNeetCodeSheet(request, response) {
           {
             path: "solution_article_links",
           },
+          {
+            path: "practice_solution_links",
+          }
         ],
       })
       .sort({ topic_no: 1 })
@@ -457,6 +478,9 @@ async function getNishantChaharSDESheet(request, response) {
           {
             path: "solution_article_links",
           },
+          {
+            path: "practice_solution_links",
+          }
         ],
       })
       .sort({ topic_no: 1 })

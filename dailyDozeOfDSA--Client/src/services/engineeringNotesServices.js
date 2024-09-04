@@ -42,3 +42,15 @@ export async function getEngineeringNoteById(noteId) {
     throw error;
   }
 }
+
+export async function getNotesUrlFromSlug(slug) {
+  try {
+    const response = await axios.get(
+      `/api/v1/notes/getNotesUrlFromSlug?slug=${slug}`
+    );
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

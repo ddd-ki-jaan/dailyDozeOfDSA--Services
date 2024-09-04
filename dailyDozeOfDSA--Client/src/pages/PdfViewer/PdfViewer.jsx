@@ -1,80 +1,139 @@
-import { useEffect, useRef } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { pdfjs, Document, Page } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+import { IoCloseOutline } from "react-icons/io5";
+import { UserContext } from "../../contexts/userContext";
+import PDFViewerNavbar from "../../components/PDFViewerComponents/PDFViewerNavbar/PDFViewerNavbar";
+import { PDFViewerContext } from "../../contexts/pdfViewerContext";
+import PDFPageThumbnail from "../../components/PDFViewerComponents/PDFPageThumbnail/PDFPageThumbnail";
+import PDFPageBookmars from "../../components/PDFViewerComponents/PDFPageBookmarks/PDFPageBookmarks";
+import { useNavigate, useParams } from "react-router-dom";
+import { handleApiError } from "../../constants/reusableFunctions";
+import { getNotesUrlFromSlug } from "../../services/engineeringNotesServices";
+import { Virtuoso } from "react-virtuoso";
+import CreateBookmarkFormModal from "../../components/PDFViewerComponents/CreateBookmarkFormModal/CreateBookmarkFormModal";
 
-export default function PdfViewerComponent(props) {
-  const containerRef = useRef(null);
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-  const optionsToKeep = [
-    "sidebar-thumbnails",
-    "sidebar-document-outline",
-    "sidebar-bookmarks",
-    "pager",
-    "zoom-out",
-    "zoom-in",
-    "zoom-mode",
-    "search",
-  ];
+function pdfViewer() {
+  const { userLoggedInStatus, setUserLoggedInStatusToFalse } =
+    useContext(UserContext);
+  const {
+    totalNumOfPages,
+    pageScaleNum,
+    showPageThumbnails,
+    showMyBookmarks,
+    onDocumentLoadSuccess,
+    closeLeftSlider,
+  } = useContext(PDFViewerContext);
+
+  const navigate = useNavigate();
+
+  const [notesUrl, setNotesUrl] = useState(null);
+
+  let { slug = "" } = useParams();
+
+  let loggedIn = userLoggedInStatus?.loggedIn ?? false;
+
+  const virtuosoRef = useRef(null);
+
+  function navigateToClickedPageNumber(pageIndex) {
+    virtuosoRef?.current.scrollToIndex({
+      index: pageIndex,
+    });
+    return false;
+  }
+
+  async function getNotesUrlFromSlugHandler() {
+    try {
+      const response = await getNotesUrlFromSlug(slug);
+      if (response?.data?.success) {
+        setNotesUrl(response.data.data);
+      }
+    } catch (error) {
+      console.log("*** getNotesUrlFromSlugHandler error: ***", error);
+      handleApiError(error, navigate, setUserLoggedInStatusToFalse);
+    }
+  }
 
   useEffect(() => {
-    const container = containerRef.current; // This `useRef` instance will render the PDF.
+    document.body.style.width = "100%";
+    document.body.style.border = "none";
 
-    let PSPDFKit, instance;
+    getNotesUrlFromSlugHandler();
 
-    (async function () {
-      PSPDFKit = await import("pspdfkit");
-
-      PSPDFKit.unload(container); // Ensure that there's only one PSPDFKit instance.
-
-      const publicUrl = `${window.location.protocol}//${window.location.host}`
-      console.log("*** publicUrl: ***", publicUrl);
-      instance = await PSPDFKit.load({
-        licenseKey: import.meta.env.VITE_PSPDFKIT_LICENSE_KEY,
-        styleSheets: ["/custom-pspdf-kit-style.css"],
-        container,
-        // document: "/sample.pdf",
-        document: "https://www.juniper.net/assets/de/de/local/pdf/books/de-tin-chapter20.pdf",
-        baseUrl: `${window.location.protocol}//${window.location.host}/`,
-        renderPageCallback: function (ctx, pageIndex, pageSize) {
-          const pageWidth = pageSize.width;
-          const pageHeight = pageSize.height;
-          ctx.font = "18px Montserrat";
-          ctx.fillStyle = "black";
-          ctx.fillText("dailydozeofdsa.com", 20, 40);
-          ctx.fillText("dailydozeofdsa.com", pageWidth / 2, pageHeight - 40);
-        },
-      });
-
-      let toolbarItems = instance.toolbarItems;
-      instance.setToolbarItems(
-        toolbarItems.filter((item) => optionsToKeep.includes(item.type))
-      );
-      instance.setInlineTextSelectionToolbarItems(
-        ({ defaultItems, hasDesktopLayout }, selection) => {
-          return [];
-        }
-      );
-      instance.setViewState((state) => state.set("allowPrinting", false));
-      // instance.setViewState((state) => state.set("currentPageIndex", 3));
-
-      const sampleBookmarks = [
-        new PSPDFKit.Bookmark({
-          name: "bookmark - 1",
-          action: new PSPDFKit.Actions.GoToAction({ pageIndex: 1 }),
-        }),
-        new PSPDFKit.Bookmark({
-          name: "bookmark - 2",
-          action: new PSPDFKit.Actions.GoToAction({ pageIndex: 3 }),
-        }),
-      ];
-
-      instance.create(sampleBookmarks);
-
-      instance.addEventListener("bookmarks.create", async (bookmark) => {
-        console.log("Bookmark created", bookmark.toJS());
-      });
-    })();
-
-    return () => PSPDFKit && PSPDFKit.unload(container);
+    return () => {
+      document.body.style.width = "980px";
+      document.body.style.borderWidth = "0 2px";
+      document.body.style.borderStyle = "solid";
+      document.body.style.borderColor = "black";
+    };
   }, []);
 
-  return <div ref={containerRef} className="w-full h-lvh" />;
+  return (
+    <>
+      <div className="">
+        {notesUrl && (
+          <Document file={notesUrl} onLoadSuccess={onDocumentLoadSuccess}>
+            <div>
+              <PDFViewerNavbar />
+              <div className="flex gap-x-2 ml-4">
+                <div
+                  className={`w-[300px] min-w-[300px] sticky top-[50px] h-screen overflow-y-auto transition-all duration-500 ease-in-out ${
+                    showPageThumbnails || showMyBookmarks
+                      ? "ml-0"
+                      : "-ml-[300px]"
+                  }`}
+                >
+                  {showPageThumbnails && (
+                    <PDFPageThumbnail
+                      navigateToClickedPageNumberHandler={
+                        navigateToClickedPageNumber
+                      }
+                    />
+                  )}
+
+                  {showMyBookmarks && false && <PDFPageBookmars />}
+                  <div className="absolute top-0 right-[20px]">
+                    <IoCloseOutline
+                      className="text-2xl bg-blue-100 cursor-pointer w-6 h-6"
+                      onClick={closeLeftSlider}
+                    />
+                  </div>
+                </div>
+                <div className="flex-grow overflow-y-auto">
+                  <Virtuoso
+                    ref={virtuosoRef}
+                    totalCount={totalNumOfPages}
+                    itemContent={(index) => (
+                      <div className="mb-4">
+                        <Page
+                          width="800"
+                          scale={pageScaleNum}
+                          pageNumber={index + 1}
+                        />
+                        <span className="text-sm">
+                          {index + 1} / {totalNumOfPages}
+                        </span>
+                      </div>
+                    )}
+                  />
+                </div>
+              </div>
+            </div>
+          </Document>
+        )}
+      </div>
+      <CreateBookmarkFormModal />
+    </>
+  );
 }
+
+export default pdfViewer;

@@ -70,8 +70,16 @@ export async function getJobs(request, response) {
       {
         $lookup: {
           from: "media",
-          localField: "companyArr.companyLogo",
-          foreignField: "_id",
+          let: { comapnyLogoId: { $arrayElemAt: ["$companyArr.companyLogo", 0] } },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ["$_id", "$$comapnyLogoId"] },
+              },
+            },
+          ],
+          // localField: "companyArr.companyLogo",
+          // foreignField: "_id",
           as: "companyLogoArr",
         },
       },
