@@ -68,10 +68,10 @@ export async function getSeperateProblemStatusCountOfASheet(sheetName, user) {
 
 export function isValidCodingProfileLink(profileName, profileLink) {
   const regexMap = {
-    CODEFORCES: /^https?:\/\/(www\.)?codeforces\.com\/profile\/.+$/,
-    CODECHEF: /^https?:\/\/(www\.)?codechef\.com\/users\/.+$/,
-    LEETCODE: /^https?:\/\/(www\.)?leetcode\.com\/u\/.+$/,
-    HACKERRANK: /^https?:\/\/(www\.)?hackerrank\.com\/profile\/.+$/,
+    CODEFORCES: /^https?:\/\/(www\.)?codeforces\.com\/profile\/[a-zA-Z0-9_]+\/?$/,
+    CODECHEF: /^https?:\/\/(www\.)?codechef\.com\/users\/[a-zA-Z0-9_]+\/?$/,
+    LEETCODE: /^https?:\/\/(www\.)?leetcode\.com\/u\/[a-zA-Z0-9_]+\/?$/,
+    HACKERRANK: /^https?:\/\/(www\.)?hackerrank\.com\/profile\/[a-zA-Z0-9_]+\/?$/,
   };
 
   const regex = regexMap[profileName];
@@ -80,11 +80,11 @@ export function isValidCodingProfileLink(profileName, profileLink) {
 
 export function isValidSocialProfileLink(profileName, profileLink) {
   const regexMap = {
-    LINKEDIN: /^https?:\/\/(www\.)?linkedin\.com\/in\/.+$/,
-    GITHUB: /^https?:\/\/(www\.)?github\.com\/.+$/,
-    TWITTER: /^https?:\/\/(www\.)?x\.com\/.+$/,
-    YOUTUBE: /^https?:\/\/(www\.)?youtube\.com\/@?.+$/,
-  };
+    LINKEDIN: /^https?:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?$/,
+    GITHUB: /^https?:\/\/(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/,
+    TWITTER: /^https?:\/\/(www\.)?x\.com\/[a-zA-Z0-9_]+\/?$/,
+    YOUTUBE: /^https?:\/\/(www\.)?youtube\.com\/@?[a-zA-Z0-9_-]+\/?$/
+  };    
 
   const regex = regexMap[profileName];
   return regex ? regex.test(profileLink) : false;
