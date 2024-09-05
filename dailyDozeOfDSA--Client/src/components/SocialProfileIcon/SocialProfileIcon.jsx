@@ -43,7 +43,12 @@ function SocialProfileIcon({ profileObj }) {
 
   return (
     <div className="relative group w-10 h-10 flex justify-center items-center rounded-full text-lg">
-      <img src={logoImg} />
+      <span
+        className="cursor-pointer"
+        onClick={() => window.open(profileObj.profileLink, "_blank")}
+      >
+        <img src={logoImg} />
+      </span>
       <span
         onClick={deleteUserSocialProfileHandler}
         className="absolute cursor-pointer top-full pt-2 px-2"
