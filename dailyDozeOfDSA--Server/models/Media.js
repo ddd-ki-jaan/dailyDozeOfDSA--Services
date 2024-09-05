@@ -22,6 +22,12 @@ const mediaSchema = new Schema(
       type: String,
       required: true,
     },
+    collection_source: {
+      type: String,
+      enum: ["ENGINEERING_NOTES", "JOBS", "COMPANIES", "STATIC_DATA"],
+      default: "STATIC_DATA",
+      required: true,
+    },
   },
   { timestamps: true }
 );
