@@ -8,6 +8,7 @@ import SavedNote from "../models/User/SavedNote.js";
 import Note from "../models/Notes/NoteModel.js";
 import ProblemSheetNameEnum from "../enums/ProblemSheetNameEnum.js";
 import { updateUserDetails } from "../services/userServices.js";
+import { isValidCodingProfileLink, isValidSocialProfileLink } from "../services/utilServices.js";
 
 export async function updateUser(request, response) {
   try {
@@ -51,6 +52,13 @@ export async function updateUserCodingProfile(request, response) {
       return response.status(400).json({
         success: false,
         message: "profile name couldn't be recognized",
+      });
+    }
+
+    if (!isValidCodingProfileLink(profileName, profileLink)) {
+      return response.status(400).json({
+        success: false,
+        message: "Invalid profile link for the selected profile name",
       });
     }
 
@@ -183,11 +191,17 @@ export async function updateUserSocialProfile(request, response) {
       });
     }
 
-    console.log("yello...");
     if (!UserSocialProfileEnum.includes(profileName)) {
       return response.status(400).json({
         success: false,
         message: "profile name couldn't be recognized",
+      });
+    }
+
+    if (!isValidSocialProfileLink(profileName, profileLink)) {
+      return response.status(400).json({
+        success: false,
+        message: "Invalid profile link for the selected profile name",
       });
     }
 
