@@ -67,7 +67,7 @@ function PDFCard({ note, isSaved = false }) {
           </div>
         </div>
         <div className="w-full text-center text-ellipsis">
-          <p className="line-clamp-2">{note && note.noteTitle}</p>
+          <p className="line-clamp-3">{note && note.noteTitle}</p>
         </div>
       </div>
     </>

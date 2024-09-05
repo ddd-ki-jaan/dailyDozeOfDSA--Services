@@ -17,7 +17,7 @@ const Media: CollectionConfig = {
       required: true,
     },
     {
-      name:  "collection_source",
+      name: "collection_source",
       type: "select",
       options: [
         {
@@ -35,11 +35,11 @@ const Media: CollectionConfig = {
         {
           label: "Static Data",
           value: "STATIC_DATA",
-        }
+        },
       ],
       required: true,
-      defaultValue: "STATIC_DATA",
-    }
+      // defaultValue: "STATIC_DATA",
+    },
   ],
   hooks: {
     beforeChange: [
@@ -51,16 +51,18 @@ const Media: CollectionConfig = {
             ""
           );
 
-          const randomString = Array.from({length: 25}, (_, index) => index).reduce((acc, _) => acc + "x", "").replace(/x/g, () => ~~(Math.random() * 10) + "");
+          const randomString = Array.from({ length: 25 }, (_, index) => index)
+            .reduce((acc, _) => acc + "x", "")
+            .replace(/x/g, () => ~~(Math.random() * 10) + "");
 
-          let key = data.collection_source
+          let key = data.collection_source;
           key = key.toLowerCase();
           const newFileName = `${key}/${fileNameWithoutExtension}-${Date.now()}-${randomString}.${fileExtension}`;
           data.filename = newFileName;
 
           data.url = `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.S3_REGION}.amazonaws.com/${data.filename}`;
           console.log("*** aws s3 file data ***", data);
-        
+
           return data;
         } catch (error) {
           throw error;

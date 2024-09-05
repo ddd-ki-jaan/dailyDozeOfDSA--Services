@@ -60,7 +60,7 @@ const Notes: CollectionConfig = {
         try {
           data.noteTitle = data.noteTitle.trim().replace(/\s+/g, " ");
 
-          const isValid = /^[a-zA-Z\s]+$/.test(data.noteTitle);
+          const isValid = /^[a-zA-Z0-9,\s]+$/.test(data.noteTitle);
           if (!isValid) {
             throw new Error(
               "note title must only contain english alphabets and spaces"

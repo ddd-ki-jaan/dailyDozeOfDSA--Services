@@ -155,7 +155,7 @@ function EngineeringNotes() {
           </div>
         </div>
         <div className="w-full mt-8 ">
-          <div className="w-full grid grid-cols-3 gap-x-16 gap-y-8">
+          <div className="w-full grid grid-cols-3 gap-x-16 gap-y-14">
             {engineeringNotes?.length > 0 ? (
               engineeringNotes.map((note, index) => (
                 <PDFCard key={note._id} note={note} isSaved={!!note.isSaved} />
