@@ -65,3 +65,27 @@ export async function getSeperateProblemStatusCountOfASheet(sheetName, user) {
     throw error;
   }
 }
+
+export function isValidCodingProfileLink(profileName, profileLink) {
+  const regexMap = {
+    CODEFORCES: /^https?:\/\/(www\.)?codeforces\.com\/profile\/.+$/,
+    CODECHEF: /^https?:\/\/(www\.)?codechef\.com\/users\/.+$/,
+    LEETCODE: /^https?:\/\/(www\.)?leetcode\.com\/u\/.+$/,
+    HACKERRANK: /^https?:\/\/(www\.)?hackerrank\.com\/profile\/.+$/,
+  };
+
+  const regex = regexMap[profileName];
+  return regex ? regex.test(profileLink) : false;
+}
+
+export function isValidSocialProfileLink(profileName, profileLink) {
+  const regexMap = {
+    LINKEDIN: /^https?:\/\/(www\.)?linkedin\.com\/in\/.+$/,
+    GITHUB: /^https?:\/\/(www\.)?github\.com\/.+$/,
+    TWITTER: /^https?:\/\/(www\.)?x\.com\/.+$/,
+    YOUTUBE: /^https?:\/\/(www\.)?youtube\.com\/@?.+$/,
+  };
+
+  const regex = regexMap[profileName];
+  return regex ? regex.test(profileLink) : false;
+}

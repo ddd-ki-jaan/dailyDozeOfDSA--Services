@@ -55,6 +55,18 @@ function AddProfilePopup({
     updateSelectedProfileLink(inputProfileLinkVal);
   }
 
+  function isValidCodingProfileLink(profileName, profileLink) {
+    const regexMap = {
+      CODEFORCES: /^https?:\/\/(www\.)?codeforces\.com\/profile\/.+$/,
+      CODECHEF: /^https?:\/\/(www\.)?codechef\.com\/users\/.+$/,
+      LEETCODE: /^https?:\/\/(www\.)?leetcode\.com\/u\/.+$/,
+      HACKERRANK: /^https?:\/\/(www\.)?hackerrank\.com\/profile\/.+$/,
+    };
+  
+    const regex = regexMap[profileName];
+    return regex ? regex.test(profileLink) : false;
+  }
+
   async function updateUserCodingProfileHandler() {
     if (profileSubmitted) return;
 
@@ -66,6 +78,12 @@ function AddProfilePopup({
       if (!selectedProfileLink || selectedProfileLink.length === 0) {
         updateProfileLinkInputError(
           "you need to put the url corresponding to the profile name"
+        );
+        return;
+      }
+      if (!isValidCodingProfileLink(selectedProfileName, selectedProfileLink)) {
+        updateProfileLinkInputError(
+          `Invalid URL for ${selectedProfileName}. Please provide a valid URL.`
         );
         return;
       }
@@ -94,6 +112,18 @@ function AddProfilePopup({
     togglePopup();
   }
 
+  function isValidSocialProfileLink(profileName, profileLink) {
+    const regexMap = {
+      LINKEDIN: /^https?:\/\/(www\.)?linkedin\.com\/in\/.+$/,
+      GITHUB: /^https?:\/\/(www\.)?github\.com\/.+$/,
+      TWITTER: /^https?:\/\/(www\.)?x\.com\/.+$/,
+      YOUTUBE: /^https?:\/\/(www\.)?youtube\.com\/@?.+$/,
+    };
+  
+    const regex = regexMap[profileName];
+    return regex ? regex.test(profileLink) : false;
+  }  
+
   async function updateUserSocialProfileHandler() {
     if (profileSubmitted) return;
     try {
@@ -104,6 +134,12 @@ function AddProfilePopup({
       if (!selectedProfileLink || selectedProfileLink.length === 0) {
         updateProfileLinkInputError(
           "you need to put the url corresponding to the profile name"
+        );
+        return;
+      }
+      if (!isValidSocialProfileLink(selectedProfileName, selectedProfileLink)) {
+        updateProfileLinkInputError(
+          `Invalid URL for ${selectedProfileName}. Please provide a valid URL.`
         );
         return;
       }
