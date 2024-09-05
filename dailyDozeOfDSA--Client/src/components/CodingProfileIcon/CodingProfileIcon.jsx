@@ -42,7 +42,12 @@ function CodingProfileIcon({ profileObj }) {
 
   return (
     <div className="relative group w-10 h-10 bg-black flex justify-center items-center rounded-full text-white text-lg font-light">
-      {logoText}
+      <span
+        className="cursor-pointer"
+        onClick={() => window.open(profileObj.profileLink, "_blank")}
+      >
+        {logoText}
+      </span>
       <span
         onClick={deleteUserCodingProfileHandler}
         className="absolute cursor-pointer top-full pt-2 px-2"
