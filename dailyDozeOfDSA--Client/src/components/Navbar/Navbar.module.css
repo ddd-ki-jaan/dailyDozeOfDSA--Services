@@ -34,6 +34,12 @@
   border-bottom: 2px solid #000;
 }
 
+.sign-in-btn {
+  padding: 6px 2px;
+  background: greenyellow;
+  display: none;
+}
+
 .navigate-icons-container {
   display: flex;
   align-items: center;

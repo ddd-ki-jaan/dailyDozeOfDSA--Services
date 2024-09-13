@@ -22,6 +22,7 @@ function ProblemNotesModal({ problemId, sheetEnum, problemNote }) {
   } = useContext(ProblemSetContext);
 
   const [isProcessing, setIsProcessing] = useState(false);
+  const [modalSize, setModalSize] = useState("sm");
 
   const navigate = useNavigate();
 
@@ -34,6 +35,26 @@ function ProblemNotesModal({ problemId, sheetEnum, problemNote }) {
       changeProblemNotesInputText(problemNote);
     }
   }, [showProblemNotesModal]);
+
+  useEffect(() => {
+    function updateModalSize() {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setModalSize("sm");
+      } else if (width >= 640 && width < 768) {
+        setModalSize("md");
+      } else {
+        setModalSize("lg");
+      }
+    }
+
+    updateModalSize();
+    window.addEventListener("resize", updateModalSize);
+
+    () => {
+      window.removeEventListener("resize", updateModalSize);
+    };
+  }, []);
 
   async function updateProblemNotesHandler() {
     try {
@@ -80,6 +101,7 @@ function ProblemNotesModal({ problemId, sheetEnum, problemNote }) {
     <Flowbite theme={{ theme: customTheme }}>
       <Modal
         show={showProblemNotesModal === problemId}
+        size={modalSize}
         onClose={() => toggleProblemNotesModal(problemId)}
         dismissible
       >

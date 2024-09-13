@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { sitePageLinks, siteOtherPageLinks } from "../../constants/Footer";
-import { IoMdHeart } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import ReportBugFormModal from "../ReportBugFormModal/ReportBugFormModal";
 import ContactUsFormModal from "../ContactUsFormModal/ContactUsFormModal";
@@ -18,9 +17,9 @@ function Footer() {
   }
 
   return (
-    <div className="">
+    <div className="flex self-end">
       <div className="page-container flex justify-between bg-black text-white ">
-        <div>
+        <div className="hidden sm:block">
           <div className="font-bold text-xl cursor-pointer">DailyDozeOfDSA</div>
         </div>
         <div className="text-sm font-light">
@@ -56,9 +55,28 @@ function Footer() {
           </ul>
         </div>
       </div>
-      <div>
-        <div className="text-center flex items-center justify-center">
-          made with <IoMdHeart className="inline text-xl" />.
+      <div className="py-2 gap-x-4 flex items-center justify-center">
+        <div className="flex items-center">
+          <span className="mr-2 underline">follow us on:</span>
+          <div className="flex items-center gap-x-2">
+            <a target="_blank" href="https://www.instagram.com/dailydozeofdsa/">
+              <img
+                className="w-6 h-6 cursor-pointer"
+                src="/instagram.png"
+                alt="instagram"
+              />
+            </a>
+            <a
+              target="_blank"
+              href="https://www.linkedin.com/company/daily-doze-of-dsa/?viewAsMember=true"
+            >
+              <img
+                className="w-6 h-6 cursor-pointer"
+                src="/linkedin.png"
+                alt="linkedin"
+              />
+            </a>
+          </div>
         </div>
       </div>
       <ReportBugFormModal

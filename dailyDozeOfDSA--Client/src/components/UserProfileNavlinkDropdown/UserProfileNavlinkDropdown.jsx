@@ -5,8 +5,7 @@ import { logOut } from "../../services/authServices";
 import { UserContext } from "../../contexts/userContext";
 
 function UserProfileNavlinkDropdown() {
-  const { setUserLoggedInStatusToNull, setUserLoggedInStatusToFalse } =
-    useContext(UserContext);
+  const { setUserLoggedInStatusToFalse } = useContext(UserContext);
 
   const navigate = useNavigate();
 

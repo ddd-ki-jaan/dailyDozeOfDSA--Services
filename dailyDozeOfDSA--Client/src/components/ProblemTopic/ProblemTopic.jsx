@@ -1,7 +1,6 @@
 import { Progress } from "flowbite-react";
 import ProblemsTable from "../ProblemsTable/ProblemsTable";
 import { Flowbite } from "flowbite-react";
-import styles from "./ProblemTopic.module.css";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/userContext";
 
@@ -46,24 +45,26 @@ function ProblemTopic({
       <div
         id={currTopicData._id}
         onClick={(event) => toggleProblemsTable(event, currTopicData._id)}
-        className={styles["topic-header-container"]}
+        className="mb-[14px] p-[12px] border border-black rounded-tr-[7px] rounded-bl-[7px] cursor-pointer flex flex-col-reverse sm:flex-row sm:justify-between items-center gap-y-2"
       >
-        <div className={styles["header-topic-no"]}>
-          <div>Day: {currTopicData.day_no || currTopicData.topic_no}</div>
+        <div className="flex flex-col items-center sm:flex-row">
+          <div className="text-nowrap text-[1rem]">
+            Day: {currTopicData.day_no || currTopicData.topic_no}
+          </div>
+          <div className="text-nowrap sm:text-wrap sm:ml-[24px] text-[1rem] sm:text-[1.2rem] font-[400] tracking-[0.1rem]">
+            {currTopicData.topic_name}
+          </div>
         </div>
-        <div className={styles["header-topic-name"]}>
-          <div>{currTopicData.topic_name}</div>
-        </div>
-        <div className={styles["progress-bar"]}>
+        <div className="w-[250px] h-[7px]">
           <Progress
             progress={progressBarPerNum || 0}
-            className=" "
+            className=""
             color="black"
           />
         </div>
       </div>
       {showProblemsTable && showProblemsTable == currTopicData._id && (
-        <div className={styles["problems-table-container"]}>
+        <div>
           <ProblemsTable
             sheetEnum={sheetEnum}
             problemsArr={currTopicData.problems}

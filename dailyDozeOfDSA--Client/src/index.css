@@ -93,6 +93,21 @@ body {
 
 .page-container {
   padding: 19px 38px;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1024px) {
+  body {
+    width: 100vw;
+    overflow-x: none;
+    border: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .page-container {
+    padding: 12px;
+  }
 }
 
 @layer components {
