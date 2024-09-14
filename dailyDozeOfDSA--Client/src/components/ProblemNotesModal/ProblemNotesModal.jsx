@@ -101,7 +101,7 @@ function ProblemNotesModal({ problemId, sheetEnum, problemNote }) {
     <Flowbite theme={{ theme: customTheme }}>
       <Modal
         show={showProblemNotesModal === problemId}
-        size={modalSize}
+        size="md"
         onClose={() => toggleProblemNotesModal(problemId)}
         dismissible
       >

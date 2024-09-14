@@ -48,7 +48,7 @@ function A2ZProblemSubTopic({
         className="mb-[14px] p-[12px] border-[1.5px] border-black rounded-tr-[7px] rounded-bl-[7px] cursor-pointer flex flex-col-reverse md:flex-row items-center gap-y-2"
         onClick={(event) => toggleProblemsTable(event, currSubTopicData._id)}
       >
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col md:flex-row items-center">
           <div className="whitespace-nowrap">
             Topic: {topic_no}.{currSubTopicData.sub_step_no}
           </div>

@@ -63,3 +63,13 @@
   padding: 8px !important;
   background-color: lightgray;
 }
+
+/* dashboard profile card styling */
+.profile-card {
+  height: 200px;
+  width: 100%;
+  display: none;
+}
+
+@media only screen and (max-width: 640px) {
+}

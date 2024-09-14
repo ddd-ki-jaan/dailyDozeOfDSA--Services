@@ -72,7 +72,7 @@ function Dashboard() {
           <div className="border-b border-dashed border-black">
             <span className="text-2xl font-light">Your Profile Info...</span>
           </div>
-          <div className="mt-6 grid grid-cols-3 gap-x-2">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-x-2 gap-y-2">
             <div className="profile-card">
               <div className="border-black rounded-full relative mb-2">
                 <img
@@ -97,7 +97,7 @@ function Dashboard() {
                 toggleModal={() => toggleUpdateUserDetailsModal(user.name)}
               />
             </div>
-            <div className="profile-card justify-evenly">
+            <div className="profile-card">
               <div className="text-xl font-semibold">SocialProfiles</div>
               <div className="flex gap-x-2 justify-center items-center">
                 {user && user.userSocialProfiles.length === 0 && (
@@ -122,7 +122,7 @@ function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className="profile-card justify-evenly">
+            <div className="profile-card">
               <div className="text-xl font-semibold">CodingProfiles</div>
               <div className="flex gap-x-2 items-center">
                 {user && user.userCodingProfiles.length === 0 && (
@@ -169,13 +169,15 @@ function Dashboard() {
               Track Your Sheet Progress...
             </span>
           </div>
-          <div className="mt-6 grid grid-cols-4 gap-4">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 justify-items-center">
             {problemSheets.map((currSheet) => (
-              <SheetProgressChart
-                key={currSheet.sheetName}
-                SheetName={currSheet.sheetName}
-                sheetEnum={currSheet.sheetEnum}
-              />
+              <div key={currSheet.sheetName} className="w-full max-w-[220px]">
+                <SheetProgressChart
+                  key={currSheet.sheetName}
+                  SheetName={currSheet.sheetName}
+                  sheetEnum={currSheet.sheetEnum}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -183,17 +185,13 @@ function Dashboard() {
           <div className="border-b border-dashed border-black">
             <span className="text-2xl font-light">Your Saved Notes...</span>
           </div>
-          <div className="mt-6 w-full grid grid-cols-3 gap-x-16 gap-y-12">
+          <div className="mt-6 mb-6 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-x-16 gap-y-12">
             {savedEngineeringNotes?.length > 0 ? (
-              savedEngineeringNotes
-                .slice(0, 3)
-                .map((savedNote, index) => (
-                  <PDFCard
-                    key={index}
-                    note={savedNote}
-                    isSaved={!!savedNote.isSaved}
-                  />
-                ))
+              savedEngineeringNotes.slice(0, 3).map((savedNote, index) => (
+                <div key={index} className="w-full max-w-[280px]">
+                  <PDFCard note={savedNote} isSaved={!!savedNote.isSaved} />
+                </div>
+              ))
             ) : (
               <div>No Saved Notes found</div>
             )}

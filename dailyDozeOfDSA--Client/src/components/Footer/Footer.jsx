@@ -17,7 +17,7 @@ function Footer() {
   }
 
   return (
-    <div className="flex self-end">
+    <div className="">
       <div className="page-container flex justify-between bg-black text-white ">
         <div className="hidden sm:block">
           <div className="font-bold text-xl cursor-pointer">DailyDozeOfDSA</div>

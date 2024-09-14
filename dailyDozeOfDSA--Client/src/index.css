@@ -112,6 +112,6 @@ body {
 
 @layer components {
   .profile-card {
-    @apply flex flex-col justify-center border-2 border-black w-auto min-w-[250px] items-center py-2 gap-1 rounded-tr-[7px] rounded-bl-[7px];
+    @apply flex flex-col justify-center border-2 border-black w-full max-w-[350px] items-center py-2 gap-1 rounded-tr-[7px] rounded-bl-[7px];
   }
 }

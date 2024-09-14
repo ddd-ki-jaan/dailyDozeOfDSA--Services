@@ -13,7 +13,9 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL:
-        process.env.BACKEND_BASE_URL + "/api/v1/auth/google/redirect",
+        process.env.YELLO_ENV === "PROD"
+          ? process.env.BACKEND_BASE_URL_PROD
+          : process.env.BACKEND_BASE_URL_DEV + "/api/v1/auth/google/redirect",
       passReqToCallback: true,
       scope: ["profile", "email"],
     },

@@ -15,9 +15,8 @@ function ProblemSet() {
       <div className="page-container">
         <div className="grid gap-y-8 gap-x-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
           {problemSheets.map((problemSheet, index) => (
-            <div className="max-w-[280px] w-full">
+            <div key={index} className="max-w-[280px] w-full">
               <ProblemSetCard
-                key={index}
                 sheetName={problemSheet.sheetName}
                 slug={problemSheet.slug}
                 sheetEnum={problemSheet.sheetEnum}

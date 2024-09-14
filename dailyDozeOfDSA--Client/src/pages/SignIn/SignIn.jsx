@@ -51,18 +51,14 @@ function SignIn() {
   return (
     <>
       <SEO title={pageTitle} description={pageDescription} url={pageUrl} />
-      <div
-        className={[styles["login-container-outer"], "page-container"].join(
-          " "
-        )}
-      >
-        <div className={styles["login-container-inner"]}>
-          <div className={styles["container-heading"]}>Login With...</div>
+      <div className="page-container flex width-full h-max justify-center">
+        <div className="w-[550px] h-[280px] bg-black mt-[15vh] flex flex-col text-center px-[8px] py-[16px] text-white rounded-tr-[14px] rounded-bl-[14px]">
+          <div className="font-bold text-[2.2rem] mb-[60px] underline tracking-[6px]">
+            Login With...
+          </div>
           <div className={styles["login-options-list"]}>
             <div
-              className={[styles["login-btn"], styles["google-login"]].join(
-                " "
-              )}
+              className="flex justify-evenly items-center bg-white text-black w-[180px] m-auto mb-[12px] px-[20px] py-[4px] text-[1.2rem] font-medium cursor-pointer"
               onClick={clickedGoogleAuthBtn}
             >
               <div className={styles["google-logo"]}>

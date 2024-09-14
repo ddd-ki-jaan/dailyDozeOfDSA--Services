@@ -65,7 +65,7 @@ function JobOpenings() {
     }
   }, [searchInputText]);
 
-  if (true || isLoading) {
+  if (isLoading) {
     return <Loader />;
   }
 

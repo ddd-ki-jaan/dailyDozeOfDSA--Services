@@ -53,14 +53,14 @@ function ProblemsTable({ sheetEnum, problemsArr }) {
                     />
                   </td>
                   <td className="text-base">{curr_problem.problem_name}</td>
-                  <td className="">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-center">
+                  <td className="" width="30%">
+                    <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-center">
                       {curr_problem.practice_solution_links.length > 0 ? (
                         curr_problem.practice_solution_links.map(
                           (link, index) => (
                             <div
                               key={link._id}
-                              className="whitespace-nowrap w-fit px-2 py-1 text-sm bg-[#dcf8c6] rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600"
+                              className="whitespace-nowrap w-full max-w-fit px-2 py-1 text-sm bg-[#dcf8c6] rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600"
                               onClick={() =>
                                 window.open(link.platform_link, "_blank")
                               }
