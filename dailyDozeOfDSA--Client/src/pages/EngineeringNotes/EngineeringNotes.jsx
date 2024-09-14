@@ -117,32 +117,30 @@ function EngineeringNotes() {
     <>
       <SEO title={pageTitle} description={pageDescription} url={pageUrl} />
       <div className="page-container">
-        <div className="flex justify-between items-center">
-          <div className="flex gap-x-8 items-center">
-            <div className="flex items-center gap-x-2">
-              <Label
-                className="text-md font-normal"
-                htmlFor="notesCategoryOptions"
-                value="Select Notes Category: "
-              />
-              <Select
-                value={selectedCategory}
-                onChange={(event) => changeCategoryHandler(event.target.value)}
-                sizing="sm"
-                id="notesCategoryOptions"
-                color="bllack"
-                className="flowbite-select"
-                required
-              >
-                {engineeringNoteCategories.map((option) => (
-                  <option key={option.optionValue} value={option.optionValue}>
-                    {option.optionLabel}
-                  </option>
-                ))}
-              </Select>
-            </div>
+        <div className="flex flex-col sm:flex-row gap-y-4 justify-between items-center">
+          <div className="flex self-end sm:self-auto sm:flex-col md:flex-row gap-y-2 items-center gap-x-2">
+            <Label
+              className="text-md font-normal"
+              htmlFor="notesCategoryOptions"
+              value="Select Notes Category: "
+            />
+            <Select
+              value={selectedCategory}
+              onChange={(event) => changeCategoryHandler(event.target.value)}
+              sizing="sm"
+              id="notesCategoryOptions"
+              color="bllack"
+              className="flowbite-select"
+              required
+            >
+              {engineeringNoteCategories.map((option) => (
+                <option key={option.optionValue} value={option.optionValue}>
+                  {option.optionLabel}
+                </option>
+              ))}
+            </Select>
           </div>
-          <div className="flex gap-x-2 cursor-pointer">
+          <div className="flex self-end sm:self-auto gap-x-2 cursor-pointer">
             <div
               className={`after:transition-all after:ease-in-out duration-1000 relative w-[64px] h-[24px] rounded-full border border-dashed border-black after:absolute after:w-5 after:h-5 after:bg-gray-400  after:rounded-full after:top-1/2 after:-translate-y-1/2 ${
                 showSavedNotes
@@ -154,11 +152,13 @@ function EngineeringNotes() {
             <div>My Saved Notes</div>
           </div>
         </div>
-        <div className="w-full mt-8 ">
-          <div className="w-full grid grid-cols-3 gap-x-16 gap-y-14">
+        <div className="w-full mt-8 mb-[32px]">
+          <div className="w-full grid grid-cols-1 gap-x-4 gap-y-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 justify-items-center">
             {engineeringNotes?.length > 0 ? (
               engineeringNotes.map((note, index) => (
-                <PDFCard key={note._id} note={note} isSaved={!!note.isSaved} />
+                <div key={note._id} className="max-w-[280px] w-full">
+                  <PDFCard note={note} isSaved={!!note.isSaved} />
+                </div>
               ))
             ) : (
               <NoDataFound />

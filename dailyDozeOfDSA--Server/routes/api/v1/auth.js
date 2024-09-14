@@ -24,6 +24,7 @@ router.get(
 
 /** google auth login success and failure conditions */
 router.get("/login/google/success", (request, response) => {
+  console.log(process.env.CLIENT_URL);
   response.redirect(`${process.env.CLIENT_URL}/?logIn=success`);
 });
 
@@ -33,6 +34,7 @@ router.get("/login/google/failed", (request, response) => {
 
 /** github auth login success and failure conditions */
 router.get("/login/github/success", (request, response) => {
+  console.log(process.env.CLIENT_URL);
   response.redirect(`${process.env.CLIENT_URL}/?logIn=success`);
 });
 

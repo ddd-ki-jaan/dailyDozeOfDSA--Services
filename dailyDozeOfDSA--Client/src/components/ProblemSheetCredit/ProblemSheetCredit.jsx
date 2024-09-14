@@ -1,6 +1,6 @@
 function ProblemSheetCredit({ sheetDescription }) {
   return (
-    <div className="relative w-full max-h-[100px] mb-4 border border-black rounded-tr-[14px] rounded-bl-[14px]">
+    <div className="relative w-full min-h-[100px] mb-4 border border-black rounded-tr-[14px] rounded-bl-[14px]">
       <div className="p-4 max-h-full overflow-scroll rounded-[14px]">
         {sheetDescription.description}
       </div>

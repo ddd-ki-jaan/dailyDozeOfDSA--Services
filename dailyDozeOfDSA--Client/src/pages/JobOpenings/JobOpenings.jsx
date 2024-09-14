@@ -3,7 +3,6 @@ import ReactPaginate from "react-paginate";
 import { JobOpeningsContext } from "../../contexts/jobOpeningsContext";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Select, Label } from "flowbite-react";
-import Dropdown from "../../components/Dropdown";
 import Loader from "../../components/Loader/Loader";
 import { debounce } from "lodash";
 import SEO from "../../SEO/SEO";
@@ -74,7 +73,7 @@ function JobOpenings() {
     <>
       <SEO title={pageTitle} description={pageDescription} url={pageUrl} />
       <div className="page-container">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-y-2 sm:flex-row justify-between items-center">
           <div className="flex items-center gap-x-2">
             <Label
               className="text-md font-normal"
@@ -99,20 +98,19 @@ function JobOpenings() {
               ))}
             </Select>
           </div>
-          <div className="border-b-2 border-black min-w-max flex items-center px-2">
+          <div className="border-b-2 border-black w-full sm:w-auto flex items-center px-2">
             <div>
               <i className="fa-solid fa-magnifying-glass"></i>
             </div>
-            <div>
+            <div className="w-full">
               <input
                 autoFocus
                 value={searchInputText || ""}
-                onChange={(event) => {
-                  console.log("*** input text: ***", event.target.value);
-                  setSearchInputTextHandler(event.target.value);
-                }}
+                onChange={(event) =>
+                  setSearchInputTextHandler(event.target.value)
+                }
                 placeholder="Search by Company Name / Job Title / Tags"
-                className="outline-none px-3 text-lg placeholder-gray-500 placeholder:text-sm min-w-[350px] placeholder:font-light"
+                className="w-full sm:w-[330px] md:w-[350px] outline-none px-3 text-lg placeholder-gray-500 placeholder:text-sm placeholder:font-light"
               />
             </div>
           </div>
@@ -144,10 +142,9 @@ function JobOpenings() {
             previousLabel="<<"
             nextLabel=">>"
             breakLabel="..."
-            onPageChange={(event) => {
-              console.log("*** yello event: ***", event);
-              setCurrentPageNumHandler(event.selected + 1);
-            }}
+            onPageChange={(event) =>
+              setCurrentPageNumHandler(event.selected + 1)
+            }
             breakClassName={"break"}
             pageClassName={"container-li"}
             pageLinkClassName={"container-li-a"}

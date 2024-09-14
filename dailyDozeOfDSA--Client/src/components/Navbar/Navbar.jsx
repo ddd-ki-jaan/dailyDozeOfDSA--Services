@@ -1,98 +1,91 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { UserContext } from "../../contexts/userContext";
+import { logOut } from "../../services/authServices";
 import Footer from "../Footer/Footer";
-import UserProfileNavlinkDropdown from "../UserProfileNavlinkDropdown/UserProfileNavlinkDropdown";
+import { RxCross1 } from "react-icons/rx";
+import NavbarBiggerScreen from "../NavbarBiggerScreen/NavbarBiggerScreen";
+import NavbarSmallerScreen from "../NavbarSmallerScreen/NavbarSmallerScreen";
 
 function Navbar() {
   const { userLoggedInStatus } = useContext(UserContext);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const menuIconRef = useRef(null);
+  const sidebarRef = useRef(null);
+
   const navigate = useNavigate();
+
+  const { setUserLoggedInStatusToFalse } = useContext(UserContext);
+
+  async function logUserOut(event) {
+    try {
+      let response = await logOut();
+      if (response && response.data && response.data.success) {
+        let redirectUrl = response.data.redirectUrl;
+        setUserLoggedInStatusToFalse();
+        navigate(redirectUrl);
+      }
+    } catch (error) {
+      console.log("*** logUserOut error: ***", error);
+    } finally {
+      toggleSidebar(event);
+    }
+  }
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        isSidebarOpen &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        !menuIconRef.current.contains(event.target)
+      ) {
+        setIsSidebarOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+
+    () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSidebarOpen]);
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [isSidebarOpen]);
+
+  function toggleSidebar(event) {
+    event.stopPropagation();
+    setIsSidebarOpen((prevState) => !prevState);
+  }
 
   return (
     <div>
-      <div className="min-h-screen">
-        <div className={styles["navbar-container"]}>
-          <div className={styles["navbar-left"]}>
-            <div
-              className={styles["navbar-logo"]}
-              onClick={() => navigate("/")}
-            >
-              <div className={styles["logo-img"]}>DailyDozeOfDSA</div>
-            </div>
-          </div>
-          <div className={styles["navbar-right"]}>
-            <div className={styles["nav-links-container"]}>
-              <div>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? [styles["active-link"], styles["nav-link"]].join(" ")
-                      : styles["nav-link"]
-                  }
-                  to="/"
-                >
-                  Home
-                </NavLink>
-              </div>
-              <div>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? [styles["active-link"], styles["nav-link"]].join(" ")
-                      : styles["nav-link"]
-                  }
-                  to="problemSet"
-                >
-                  ProblemSet
-                </NavLink>
-              </div>
-              <div>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? [styles["active-link"], styles["nav-link"]].join(" ")
-                      : styles["nav-link"]
-                  }
-                  to="JobOpenings"
-                >
-                  JobOpenings
-                </NavLink>
-              </div>
-              <div>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? [styles["active-link"], styles["nav-link"]].join(" ")
-                      : styles["nav-link"]
-                  }
-                  to={{
-                    pathname: "engineeringNotes",
-                    search: "?category=ALL&pageNum=1&showSavedNotes=false",
-                  }}
-                >
-                  EngineeringNotes
-                </NavLink>
-              </div>
-              <div>
-                {userLoggedInStatus && userLoggedInStatus.loggedIn ? (
-                  <UserProfileNavlinkDropdown />
-                ) : (
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? [styles["active-link"], styles["nav-link"]].join(" ")
-                        : styles["nav-link"]
-                    }
-                    to="signIn"
-                  >
-                    SignIn
-                  </NavLink>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+      <div
+        className={
+          isSidebarOpen
+            ? "min-h-screen after:content after:absolute after:top-0 after:left-0 after:w-screen after:h-screen after:bg-black after:bg-opacity-80 after:z-5"
+            : "min-h-screen"
+        }
+      >
+        <NavbarBiggerScreen
+          menuIconRef={menuIconRef}
+          toggleSidebar={toggleSidebar}
+          userLoggedInStatus={userLoggedInStatus}
+        />
+        <NavbarSmallerScreen
+          sidebarRef={sidebarRef}
+          isSidebarOpen={isSidebarOpen}
+          toggleSidebar={toggleSidebar}
+          userLoggedInStatus={userLoggedInStatus}
+          logUserOut={logUserOut}
+        />
         <div className={styles["navigate-icons-container"]}>
           <div className={styles["prev-icon"]} onClick={() => navigate(-1)}>
             <i className="fa-regular fa-circle-left"></i>

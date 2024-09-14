@@ -3,6 +3,8 @@
   border-top-right-radius: 7px;
   border-bottom-left-radius: 7px;
   margin-bottom: 14px;
+  width: auto;
+  overflow: scroll;
 }
 
 .problems-table {

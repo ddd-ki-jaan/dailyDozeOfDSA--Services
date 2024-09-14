@@ -51,27 +51,16 @@ function ProblemsTable({ sheetEnum, problemsArr }) {
                       problemId={curr_problem._id}
                       problemStatus={curr_problem.status}
                     />
-                    {/* <span className="absolute top-0 left-0 w-6 h-1/2 bg-blue-500"></span> */}
                   </td>
                   <td className="text-base">{curr_problem.problem_name}</td>
-                  {/* <td>
-                    <div className="flex gap-x-2">
-                      <div className="px-2 py-1 text-sm bg-[#dcf8c6] w-fit rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600">
-                        link-1
-                      </div>
-                      <div className="px-2 py-1 text-sm bg-[#dcf8c6] w-fit rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600">
-                        link-2
-                      </div>
-                    </div>
-                  </td> */}
-                  <td className="min-w-max">
-                    <div className="grid grid-flow-col gap-x-2">
+                  <td className="" width="30%">
+                    <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 justify-items-center">
                       {curr_problem.practice_solution_links.length > 0 ? (
                         curr_problem.practice_solution_links.map(
                           (link, index) => (
                             <div
                               key={link._id}
-                              className="whitespace-nowrap w-fit px-2 py-1 text-sm bg-[#dcf8c6] rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600"
+                              className="whitespace-nowrap w-full max-w-fit px-2 py-1 text-sm bg-[#dcf8c6] rounded-[6px] rounded-br-none cursor-pointer underline text-blue-600"
                               onClick={() =>
                                 window.open(link.platform_link, "_blank")
                               }

@@ -41,7 +41,7 @@ function PDFCard({ note, isSaved = false }) {
 
   return (
     <>
-      <div className="min-w-[220px] h-[250px]">
+      <div className="h-[250px]">
         <div
           className="cursor-pointer relative w-full h-[200px] flex items-center border border-black rounded-tr-[7px] rounded-bl-[7px]"
           onClick={() => navigate(`/pdfViewer/${note.slug}`)}

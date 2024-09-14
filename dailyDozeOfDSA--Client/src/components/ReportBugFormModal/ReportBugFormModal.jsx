@@ -48,7 +48,6 @@ function ReportBugFormModal({ show, toggle }) {
   };
 
   async function handleSubmit() {
-    console.log("Form data: ", formData);
     setLoader(true);
 
     try {

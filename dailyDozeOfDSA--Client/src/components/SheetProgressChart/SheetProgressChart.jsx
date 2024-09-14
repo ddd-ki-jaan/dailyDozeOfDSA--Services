@@ -59,8 +59,8 @@ function SheetProgressChart({ SheetName, sheetEnum }) {
   return (
     <div className="px-6 flex flex-col items-center">
       {chartDataObj && <Doughnut options={options} data={chartDataObj} />}
-      <div className="mt-2">
-        <span className="text-base capitalize font-light">{SheetName}</span>
+      <div className="mt-2 text-base capitalize font-light text-center">
+        {SheetName}
       </div>
     </div>
   );

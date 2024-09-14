@@ -146,9 +146,9 @@ function Home() {
     <>
       <SEO title={pageTitle} description={pageDescription} url={pageUrl} />
       <div className="page-container w-full">
-        <div className="mb-16 flex justify-between items-center w-full">
-          <div className="w-1/2">
-            <div className="text-5xl font-extralight">
+        <div className="mb-16 flex flex-col-reverse md:flex-row justify-between items-center w-full">
+          <div className="md:w-1/2 w-full">
+            <div className="md:text-5xl text-4xl font-extralight">
               <div className="mb-2">
                 <span className="font-bold">D</span>oor to
               </div>
@@ -178,13 +178,13 @@ function Home() {
               </button>
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="md:w-1/2 w-full flex justify-center">
             {loading ? (
-              <Skeleton className="h-[400px] w-[400px] rounded-full float-right" />
+              <Skeleton className="w-[300px] h-[300px] rounded-full md:float-right" />
             ) : (
               <div className="">
                 <img
-                  className="w-auto rounded-tr-[14px] rounded-bl-[14px]"
+                  className="md:w-auto md:h-auto w-[380px] h-[380px] rounded-tr-[14px] rounded-bl-[14px]"
                   src={homeSubtitle[0]?.image.url}
                   alt="Header Image"
                 />
@@ -200,7 +200,7 @@ function Home() {
             </div>
           </div>
           <div className="mt-2 gap-x-2 border border-black border-dashed p-2 rounded-[14px] ">
-            <div className="w-[90%] mx-auto flex flex-col gap-y-2">
+            <div className="w-[90%] mx-auto flex flex-col md:gap-y-2 gap-y-4">
               {loading
                 ? Array.from({ length: 4 }, (item, index) => (
                     <HomePageCard

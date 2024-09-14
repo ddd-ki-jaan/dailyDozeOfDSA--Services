@@ -4,9 +4,9 @@ import Skeleton from "react-loading-skeleton";
 function HomePageCard({ isLoading = false, content, isRightAligned }) {
   if (isLoading) {
     return (
-      <div className={isRightAligned ? "self-end" : ""}>
+      <div className={isRightAligned ? "md:self-end" : ""}>
         <Skeleton
-          className={`rounded-[14px] w-[500px] h-[120px] ${
+          className={`rounded-[14px] w-full md:w-[500px] h-[120px] ${
             isRightAligned ? "rounded-bl-none" : "rounded-br-none"
           }`}
         />
@@ -16,8 +16,8 @@ function HomePageCard({ isLoading = false, content, isRightAligned }) {
 
   return (
     <div
-      className={`bg-[#dcf8c6] p-2 rounded-[14px] w-[500px] ${
-        isRightAligned ? "self-end rounded-bl-none" : "rounded-br-none"
+      className={`bg-[#dcf8c6] p-2 rounded-[14px] md:w-[500px] w-full ${
+        isRightAligned ? "md:self-end rounded-bl-none" : "rounded-br-none"
       }`}
     >
       {content}
