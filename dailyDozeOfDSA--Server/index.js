@@ -14,6 +14,7 @@ import fs from "fs";
 import mime from "mime";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { pathToFileURL } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -29,6 +30,7 @@ const port = process.env.PORT || 3000;
 
 app.use(cookieParser());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, "dist")));
 app.use((request, response, next) => {
   if (request.path.endsWith(".wasm")) {
@@ -48,7 +50,7 @@ const store = MongoStore.create({
     if (fs.statSync(currDirPath).isDirectory()) {
       _loadModels(currDirPath);
     } else if (path.extname(currDir) === ".js") {
-      import(currDirPath);
+      import(pathToFileURL(currDirPath).href);
     }
   });
 })(path.join(__dirname, "models"));
@@ -67,6 +69,7 @@ const sess = {
 app.use(session(sess));
 app.use(passport.initialize());
 app.use(passport.session());
+// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/", mainRouter);
 
 app.use((request, response, next) => {

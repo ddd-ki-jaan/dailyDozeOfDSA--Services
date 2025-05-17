@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import HomePageCard from "../../components/HomePageCard/HomePageCard";
 import Loader from "../../components/Loader/Loader";
+import headerImage from "../../../public/header-image-5.jpg";
 import {
   getAboutUs,
   getHomeSubtitle,
@@ -185,7 +186,8 @@ function Home() {
               <div className="">
                 <img
                   className="md:w-auto md:h-auto w-[380px] h-[380px] rounded-tr-[14px] rounded-bl-[14px]"
-                  src={homeSubtitle[0]?.image.url}
+                  // src={homeSubtitle[0]?.image.url}
+                  src={headerImage}
                   alt="Header Image"
                 />
               </div>

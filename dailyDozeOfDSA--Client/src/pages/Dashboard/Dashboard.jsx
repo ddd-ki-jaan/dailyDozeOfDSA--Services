@@ -16,6 +16,7 @@ import CodingProfileIcon from "../../components/CodingProfileIcon/CodingProfileI
 import SocialProfileIcon from "../../components/SocialProfileIcon/SocialProfileIcon.jsx";
 import { EngineeringNotesContext } from "../../contexts/engineeringNoteContext.jsx";
 import Loader from "../../components/Loader/Loader.jsx";
+import defaultProfilePic from "../../../public/defaultProfileImg.png";
 import SEO from "../../SEO/SEO.jsx";
 
 function Dashboard() {
@@ -77,7 +78,16 @@ function Dashboard() {
               <div className="border-black rounded-full relative mb-2">
                 <img
                   className="w-28 h-28 object-cover rounded-full"
-                  src={user.profilePicUrl || "profile-user.png"}
+                  src={
+                    user?.profilePicUrl?.includes("amazonaws.com")
+                      ? defaultProfilePic
+                      : user?.profilePicUrl || defaultProfilePic
+                  }
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = defaultProfilePic;
+                  }}
+                  alt="User Profile"
                 />
                 <div
                   onClick={() => toggleUpdateUserDetailsModal(user.name)}

@@ -41,6 +41,18 @@ function EngineeringNotes() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
+  const fallbackCategories = [
+    { optionValue: "cpp", optionLabel: "C++" },
+    { optionValue: "dsa", optionLabel: "DSA" },
+    { optionValue: "cn", optionLabel: "Computer Network" },
+    { optionValue: "oops", optionLabel: "OOPS" },
+  ];
+
+  const categoriesToShow =
+    engineeringNoteCategories && engineeringNoteCategories.length > 0
+      ? engineeringNoteCategories
+      : fallbackCategories;
+
   function updateQueryParams(paramName, paramVal) {
     queryParams.set(paramName, paramVal);
 
@@ -133,7 +145,7 @@ function EngineeringNotes() {
               className="flowbite-select"
               required
             >
-              {engineeringNoteCategories.map((option) => (
+              {categoriesToShow.map((option) => (
                 <option key={option.optionValue} value={option.optionValue}>
                   {option.optionLabel}
                 </option>
@@ -154,7 +166,7 @@ function EngineeringNotes() {
         </div>
         <div className="w-full mt-8 mb-[32px]">
           <div className="w-full grid grid-cols-1 gap-x-4 gap-y-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 justify-items-center">
-            {engineeringNotes?.length > 0 ? (
+            {engineeringNotes && engineeringNotes?.length > 0 ? (
               engineeringNotes.map((note, index) => (
                 <div key={note._id} className="max-w-[280px] w-full">
                   <PDFCard note={note} isSaved={!!note.isSaved} />
@@ -165,7 +177,8 @@ function EngineeringNotes() {
             )}
           </div>
         </div>
-        {engineeringNotes?.length > 0 &&
+        {engineeringNotes &&
+        engineeringNotes?.length > 0 &&
         totalNumOfPages &&
         totalNumOfPages > 0 &&
         activePageNumber ? (

@@ -19,6 +19,7 @@ import { handleApiError } from "../../constants/reusableFunctions";
 import { getNotesUrlFromSlug } from "../../services/engineeringNotesServices";
 import { Virtuoso } from "react-virtuoso";
 import CreateBookmarkFormModal from "../../components/PDFViewerComponents/CreateBookmarkFormModal/CreateBookmarkFormModal";
+import fallbackPdfUrl from "../../../public/fallBack_Pdf.pdf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -35,23 +36,22 @@ function pdfViewer() {
   } = useContext(PDFViewerContext);
 
   const navigate = useNavigate();
+  const virtuosoRef = useRef(null);
+  const { slug = "" } = useParams();
+
+  const loggedIn = userLoggedInStatus?.loggedIn ?? false;
 
   const [notesUrl, setNotesUrl] = useState(null);
+  const [useFallback, setUseFallback] = useState(false);
 
-  let { slug = "" } = useParams();
-
-  let loggedIn = userLoggedInStatus?.loggedIn ?? false;
-
-  const virtuosoRef = useRef(null);
-
-  function navigateToClickedPageNumber(pageIndex) {
+  const navigateToClickedPageNumber = (pageIndex) => {
     virtuosoRef?.current.scrollToIndex({
       index: pageIndex,
     });
     return false;
-  }
+  };
 
-  async function getNotesUrlFromSlugHandler() {
+  const getNotesUrlFromSlugHandler = async () => {
     try {
       const response = await getNotesUrlFromSlug(slug);
       if (response?.data?.success) {
@@ -61,7 +61,7 @@ function pdfViewer() {
       console.log("*** getNotesUrlFromSlugHandler error: ***", error);
       handleApiError(error, navigate, setUserLoggedInStatusToFalse);
     }
-  }
+  };
 
   useEffect(() => {
     document.body.style.width = "100%";
@@ -80,8 +80,15 @@ function pdfViewer() {
   return (
     <>
       <div className="">
-        {notesUrl && (
-          <Document file={notesUrl} onLoadSuccess={onDocumentLoadSuccess}>
+        {(notesUrl || useFallback) && (
+          <Document
+            file={useFallback ? fallbackPdfUrl : notesUrl}
+            onLoadSuccess={onDocumentLoadSuccess}
+            onLoadError={(error) => {
+              console.error("PDF load error:", error.message);
+              setUseFallback(true);
+            }}
+          >
             <div>
               <PDFViewerNavbar />
               <div className="flex gap-x-2 ml-4">
