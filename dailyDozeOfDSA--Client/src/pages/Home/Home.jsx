@@ -187,7 +187,15 @@ function Home() {
                 <img
                   className="md:w-auto md:h-auto w-[380px] h-[380px] rounded-tr-[14px] rounded-bl-[14px]"
                   // src={homeSubtitle[0]?.image.url}
-                  src={headerImage}
+                  src={
+                    homeSubtitle[0]?.image?.url
+                      ? homeSubtitle[0]?.image?.url
+                      : headerImage
+                  }
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = headerImage;
+                  }}
                   alt="Header Image"
                 />
               </div>
