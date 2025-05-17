@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { UserContext } from "../../contexts/userContext";
 import Loader from "../../components/Loader/Loader";
 import SEO from "../../SEO/SEO";
+import ServerErrorPage from "../../components/ServerErrorPage/ServerErrorPage";
 
 function SignIn() {
   const pageTitle = "Login to DailyDozeOfDSA - Access Your Personal Dashboard";
@@ -16,6 +17,7 @@ function SignIn() {
   const location = useLocation();
 
   const [isLoading, setIsLoading] = useState(true);
+  const [serverDown, setServerDown] = useState(false);
   const { userLoggedInStatus } = useContext(UserContext);
 
   async function clickedGoogleAuthBtn() {
@@ -38,13 +40,29 @@ function SignIn() {
   }, [location.search]);
 
   useEffect(() => {
-    if (userLoggedInStatus) setIsLoading(false);
-    console.log(userLoggedInStatus);
-  }, [userLoggedInStatus]);
+    const checkServerStatus = async () => {
+      try {
+        const response = await fetch(`${backendBaseUrl}/api/v1/health`, {
+          method: "GET",
+        });
+        if (!response.ok) {
+          throw new Error("Server unhealthy");
+        }
+        setServerDown(false);
+      } catch (error) {
+        console.error("Server is down", error.message);
+        setServerDown(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkServerStatus();
+  }, []);
 
   if (isLoading) return <Loader />;
-
-  if (userLoggedInStatus.loggedIn) {
+  if (serverDown) return <ServerErrorPage />;
+  if (userLoggedInStatus?.loggedIn) {
     return <Navigate to="/?alreadyLoggedIn=true" />;
   }
 
@@ -79,7 +97,6 @@ function SignIn() {
             </div>
           </div>
         </div>
-        {/* <Toaster /> */}
       </div>
     </>
   );
