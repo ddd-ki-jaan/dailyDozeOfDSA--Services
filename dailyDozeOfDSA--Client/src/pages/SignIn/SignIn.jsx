@@ -17,8 +17,8 @@ function SignIn() {
   const location = useLocation();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [serverDown, setServerDown] = useState(false);
-  const { userLoggedInStatus } = useContext(UserContext);
+  // const [serverDown, setServerDown] = useState(false);
+  const { userLoggedInStatus, serverDown } = useContext(UserContext);
 
   async function clickedGoogleAuthBtn() {
     window.open("/api/v1/auth/google", "_self");
@@ -40,25 +40,10 @@ function SignIn() {
   }, [location.search]);
 
   useEffect(() => {
-    const checkServerStatus = async () => {
-      try {
-        const response = await fetch(`${backendBaseUrl}/api/v1/health`, {
-          method: "GET",
-        });
-        if (!response.ok) {
-          throw new Error("Server unhealthy");
-        }
-        setServerDown(false);
-      } catch (error) {
-        console.error("Server is down", error.message);
-        setServerDown(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkServerStatus();
-  }, []);
+    if (userLoggedInStatus !== null || serverDown) {
+      setIsLoading(false);
+    }
+  }, [userLoggedInStatus, serverDown]);
 
   if (isLoading) return <Loader />;
   if (serverDown) return <ServerErrorPage />;
